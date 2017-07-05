@@ -1,0 +1,129 @@
+ /***
+           
+           NOTE: Bu içeriği özet olarak hazırlamak istedim.
+           Data detaylı ve daha güzeli https://www.tutorialspoint.com/asp.net_mvc/asp.net_mvc_data_annotations.htm adresinde bulabilirsiniz. 
+
+           MVC5 - Controller Data Annotations : 
+            
+                1. Key: 
+            
+            Veri Tabanında, belli modelin ID olmasını sağlar. Identity olmasını sağlar.
+           
+            Example: 
+            [Key]
+            public int ID { get; set; }
+               
+                1.1 [Key, Column(Order = 1)]
+            [Key, Column(Order = 1)]
+             public int LicenseNumber { get; set; }
+	
+            [Key, Column(Order = 2)]
+            public string IssuingCountry { get; set; }
+            İkiden fazla primary key olması durumu;   
+            
+
+                2. TimeStamp:
+            Sql server zaman damgası veri türü bir tarih saati değeri değildir ve biriyle karıştırılmamalıdır.
+            Bu yüzden onu bir bayt dizisi olarak kullanmak, onu depolamanın en iyi yoludur.
+            
+            Example:
+            [Timestamp]
+            public byte[] TStamp { get; set; }    
+                 
+               3.ConcurrencyCheck:
+            Birden fazla kullanıcı varlığı aynı anda güncellerken, veritabanı değişikliklerine ilişkin çakışmaları gidermenin bir yolu. 
+            Concurrencycheck özniteliğini eklemeniz, varlık çerçevesinin eşzamanlılık çakışmalarını saptamak için bu özelliği kullanmasını söylüyorsunuz demektir.
+            Varlık çerçevesi güncelleme veya silme özelliklerini veritabanına ekler.
+            Birçok sütun içeren veritabanı tabloları için bu, performansı etkileyebilecek ve büyük miktarda devleti yönetmenizi gerektiren çok büyük yan tümceler anlamına gelebilir.
+            Daha büyük veritabanları için satır sürümü stratejisi tercih edilir.
+            
+            
+            Example:
+            [ConcurrencyCheck]
+            public string Title { get; set; }    
+                 
+            
+                4. Required:
+            Boş bırakılmayı kontrol eder.
+            
+
+            Example:
+            [Required(ErrorMessage="Hatali")]
+            public string LastName { get; set; }
+
+
+                 5. MaxLength
+            Maximum boyutu ayarlar.
+       
+            Example:        
+            [MaxLength(24)]
+            public string Title { get; set; }
+            
+                6. MinimumLength
+            Minimum boyutu ayarlar.
+            
+            Example:
+            [MinLength(10)]
+            public string Title { get; set; }
+                
+                7.StringLength
+            Bir String'in boyutunu ayarlayabilirsiniz.
+           
+            Example:
+            [StringLength (24)]
+            public string Title { get; set; }
+               
+
+                8.Table
+            Tablonun adını değiştirme işlemi.
+            
+            Example:
+            [Table("StudentsInfo")] 
+            public class Student{  }
+
+            [Table("StudentsInfo", Schema = "Admin")]
+            public class Student{}
+                
+                9.Column
+           Tablo özniteliği ile aynıdır, ancak sütun özniteliği sütun davranışını geçersiz kılarken tablo özniteliği tablo davranışını geçersiz kılar. 
+           Varsayılan kod ilk kuralı, mülkiyet adıyla aynı olan bir sütun adı oluşturur.
+           Kodun ilk olarak veritabanını oluşturmasına izin verirseniz ve tablolarınızdaki sütunların adını değiştirmek isterseniz. Sütun niteliği, bu varsayılan kuralı geçersiz kılar. 
+           Ef kodu ilk önce belirli bir mülkün sütun özelliğinde belirtilen ada sahip bir sütun oluşturacaktır.
+           Şimdi, mülkün firstmidname olarak adlandırıldığı aşağıdaki örneğe bir göz atalım ve kural gereği, kod ilk önce bunun firstmidname adlı bir sütuna eşleneceğini varsayır. Durum böyle değilse, aşağıdaki kodda gösterildiği gibi sütun özniteliğine sahip sütunun adını belirtebilirsiniz
+           
+            Example:
+            [Column("FirstName")]
+            public string FirstMidName { get; set; }
+
+                10.Index
+                !!?
+
+                11.ForeignKey
+            İkinci Class ile arasındaki Key Tanımlaması yapılır.
+
+            Example:
+            [ForeignKey("StudentID")]
+            public virtual Student Student { get; set; }
+
+                12.NotMapped
+            
+            CodeFirst olarak düşündüğünüzde, bir class'ta bir özelliğin database'de kolon olarak kullanmak isterseniz, bu annotations kullanılır.
+            
+            [NotMapped]
+            public int FatherName { get; set; }   
+
+            Bu Örnekte, FatherName haricindeki bütün class'daki elemanlar database'e yazılacak.
+
+                13.InverseProperty
+            İki Class arasında birden fazla ilişki varsa bu kullanılabilir,
+
+            Example:
+            [InverseProperty("CurrCourse")]
+            public virtual ICollection<Enrollment> CurrEnrollments { get; set; }
+    
+            [InverseProperty("PrevCourse")]
+            public virtual ICollection<Enrollment> PrevEnrollments { get; set; }
+
+
+}
+        */
